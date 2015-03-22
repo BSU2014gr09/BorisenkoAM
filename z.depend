@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1425849199 source:c:\Ïðîãà\z\main.cpp
+	<iostream>
+	<stdio.h>
+	"Hash.h"
+
+1425849263 source:c:\Ïðîãà\z\hash.cpp
+	<iostream>
+	<cstring>
+	"Hash.h"
+
+1425848383 c:\Ïðîãà\z\hash.h
+	"string.h"
+
+1425848767 c:\Ïðîãà\z\string.h
+
+1425848925 source:c:\Ïðîãà\z\string.cpp
+	<iostream>
+	"string.h"
+
+1427051187 source:f:\ó÷¸áà\áàðâåíîâ\Ïðîãà\z\hash.cpp
+	<iostream>
+	<cstring>
+	"Hash.h"
+
+1427051206 f:\ó÷¸áà\áàðâåíîâ\Ïðîãà\z\hash.h
+	"string.h"
+
+1425848767 f:\ó÷¸áà\áàðâåíîâ\Ïðîãà\z\string.h
+
+1427051522 source:f:\ó÷¸áà\áàðâåíîâ\Ïðîãà\z\main.cpp
+	<iostream>
+	<fstream>
+	<conio.h>
+	"Hash.h"
+
+1425848925 source:f:\ó÷¸áà\áàðâåíîâ\Ïðîãà\z\string.cpp
+	<iostream>
+	"string.h"
+
