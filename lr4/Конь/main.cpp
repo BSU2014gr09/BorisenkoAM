@@ -94,6 +94,15 @@ int main()
     list_push(move.move, begin);
     queue_push(q, move);
 
+    if(begin[0]==end[0] && begin[1]==end[1])
+    {
+        steed_in_place=true;
+
+        cout<<endl;
+        print_chessboard(cb, begin, end, tmp_move.move);
+        break;
+    }
+
     while(!steed_in_place)
     {
         move=queue_pop(q);
