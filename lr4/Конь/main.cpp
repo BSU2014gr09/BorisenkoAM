@@ -99,7 +99,8 @@ int main()
         steed_in_place=true;
 
         cout<<endl;
-        print_chessboard(cb, begin, end, tmp_move.move);
+        print_chessboard(cb, begin, end, move.move);
+	list_free(move.move);
         break;
     }
 
