@@ -62,7 +62,7 @@ int authorized_move[8][2]={ {-1, 2},
 
 int main()
 {
-    Coord begin, end, tmp_coord;
+    Coord begin, end;
     Chessboard cb={0};
     Queue *q=queue_init();
     Move move;
@@ -100,8 +100,7 @@ int main()
 
         cout<<endl;
         print_chessboard(cb, begin, end, move.move);
-	list_free(move.move);
-        break;
+        list_free(move.move);
     }
 
     while(!steed_in_place)
