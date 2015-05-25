@@ -13,8 +13,6 @@ void cvaternion_input(Cvaternion &a)
 
 void cvaternion_print(Cvaternion a)
 {
-	/*
-	красивый вывод, надо доработать
     if(a.real)
         cout<<a.real;
 
@@ -85,9 +83,7 @@ void cvaternion_print(Cvaternion a)
     }
 
     if(a.real==0 && a.i==0 && a.j==0 && a.k==0)
-        cout<<'0';*/
-
-	cout<<a.real<<"+"<<a.i<<"i+"<<a.j<<"j+"<<a.k<<'k';
+        cout<<'0';
 }
 
 Cvaternion cvaternion_plus(Cvaternion a, Cvaternion b)
