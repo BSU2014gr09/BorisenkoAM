@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 #include "cvaternion.h"
 #include <math.h>
@@ -139,10 +139,10 @@ const Cvaternion Cvaternion::operator*(const Cvaternion &a)
 {
     Cvaternion c;
 
-    c.real=a.real*real-a.i*i-a.j*j-a.k*k;
-    c.i=a.real*i+real*a.i + a.j*k-a.k*j;
-    c.j=a.real*j+real*a.j + a.k*i-a.i*k;
-    c.k=a.real*k+real*a.k + a.i*j-a.j*i;
+    c.real=real*a.real-i*a.i-j*a.j-k*a.k;
+    c.i=real*a.i+a.real*i + j*a.k-k*a.j;
+    c.j=real*a.j+a.real*j + k*a.i-i*a.k;
+    c.k=real*a.k+a.real*k + i*a.j-j*a.i;
 
     return c;
 }
