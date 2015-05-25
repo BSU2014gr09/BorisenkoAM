@@ -17,6 +17,7 @@ void cvaternion_print(Cvaternion a)
         cout<<a.real;
 
     if(a.i)
+    {
         if(a.real)
         {
             if(a.i==1)
@@ -27,44 +28,59 @@ void cvaternion_print(Cvaternion a)
                 cout<<"+"<<a.i<<'i';
         }
         else
+        {
             if(a.i==1)
                 cout<<"i";
             else if(a.i==-1)
                 cout<<"-i";
             else
                 cout<<a.i<<'i';
+        }
+    }
 
     if(a.j)
+    {
         if(a.real || a.i)
+        {
             if(a.j==1)
                 cout<<"+j";
             else if(a.j==-1)
                 cout<<"-j";
             else if(a.j>0)
                 cout<<"+"<<a.j<<'j';
+        }
         else
+        {
             if(a.j==1)
                 cout<<"j";
             else if(a.j==-1)
                 cout<<"-j";
             else
                 cout<<a.j<<'j';
+        }
+    }
 
     if(a.k)
+    {
         if(a.real || a.i || a.j)
+        {
             if(a.k==1)
                 cout<<"+k";
             else if(a.k==-1)
                 cout<<"-k";
             else if(a.k>0)
                 cout<<"+"<<a.k<<'k';
+        }
         else
+        {
             if(a.k==1)
                 cout<<"k";
             else if(a.k==-1)
                 cout<<"-k";
             else
                 cout<<a.k<<'k';
+        }
+    }
 
     if(a.real==0 && a.i==0 && a.j==0 && a.k==0)
         cout<<'0';
