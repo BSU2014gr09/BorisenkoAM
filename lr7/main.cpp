@@ -9,10 +9,25 @@ private:
     struct Car
     {
         char data[11];
-        char marka[50];
+        char *marka;
         int year;
-        char color[10];
+        char *color;
         int number;
+
+        Car()
+        {
+            marka=0;
+            color=0;
+            data[10]=0;
+            year=0;
+            number=0;
+        };
+
+        ~Car()
+        {
+            delete[]marka;
+            delete[]color;
+        };
     };
     int sz;
     Car *arr;
@@ -38,6 +53,7 @@ public:
 void CarBase::load(char *name)
 {
     ifstream f(name);
+    int l;
 
     if(!f.is_open())
         return;
@@ -47,9 +63,15 @@ void CarBase::load(char *name)
     for(int i=0; i<sz; i++)
     {
         f.read(arr[i].data, 10);
-        f.read(arr[i].marka, 50);
+        f.read((char*)&l, sizeof(int));
+        arr[i].marka=new char[l+1];
+        arr[i].marka[l+1]=0;
+        f.read(arr[i].marka, l);
         f.read((char*)&arr[i].year, sizeof(int));
-        f.read(arr[i].color, 10);
+        f.read((char*)&l, sizeof(int));
+        arr[i].color=new char[l+1];
+        arr[i].color[l+1]=0;
+        f.read(arr[i].color, l);
         f.read((char*)&arr[i].number, sizeof(int));
     }
 
@@ -59,15 +81,20 @@ void CarBase::load(char *name)
 void CarBase::save(char *name)
 {
     ofstream f(name);
+    int l;
 
     f.write((char*)&sz, sizeof(int));
 
     for(int i=0; i<sz; i++)
     {
         f.write(arr[i].data, 10);
-        f.write(arr[i].marka, 50);
+        l=strlen(arr[i].marka);
+        f.write((char*)&l, sizeof(int));
+        f.write(arr[i].marka, l);
         f.write((char*)&arr[i].year, sizeof(int));
-        f.write(arr[i].color, 10);
+        l=strlen(arr[i].color);
+        f.write((char*)&l, sizeof(int));
+        f.write(arr[i].color, l);
         f.write((char*)&arr[i].number, sizeof(int));
     }
 
@@ -92,17 +119,27 @@ void CarBase::init(int n)
 {
     sz=n;
     arr=new Car[sz];
+    char buf[256];
+    int l;
 
     for(int i=0; i<n; i++)
     {
         cout<<"введите дату ";
         cin>>arr[i].data;
         cout<<"введите марку ";
-        cin>>arr[i].marka;
+        cin>>buf;
+        l=strlen(buf);
+        arr[i].marka=new char[l+1];
+        arr[i].marka[l]=0;
+        strcpy(arr[i].marka, buf);
         cout<<"введите год ";
         cin>>arr[i].year;
         cout<<"введите цвет ";
-        cin>>arr[i].color;
+        cin>>buf;
+        l=strlen(buf);
+        arr[i].color=new char[l+1];
+        arr[i].color[l]=0;
+        strcpy(arr[i].color, buf);
         cout<<"введите номер ";
         cin>>arr[i].number;
         cout<<endl;
@@ -159,14 +196,25 @@ void CarBase::sort_by_year_produced()
 
 void CarBase::add()
 {
+    char buf[256];
+    int l;
+
     cout<<"введите дату ";
     cin>>arr[sz].data;
     cout<<"введите марку ";
-    cin>>arr[sz].marka;
+    cin>>buf;
+    l=strlen(buf);
+    arr[sz].marka=new char[l+1];
+    arr[sz].marka[l]=0;
+    strcpy(arr[sz].marka, buf);
     cout<<"введите год ";
     cin>>arr[sz].year;
     cout<<"введите цвет ";
-    cin>>arr[sz].color;
+    cin>>buf;
+    l=strlen(buf);
+    arr[sz].color=new char[l+1];
+    arr[sz].color[l]=0;
+    strcpy(arr[sz].color, buf);
     cout<<"введите номер ";
     cin>>arr[sz].number;
     cout<<endl;
@@ -178,6 +226,8 @@ bool CarBase::remove(int pos)
 {
     if(pos<sz)
     {
+        arr[pos].~Car();
+
         for(int i=pos; i<sz; i++)
             arr[i]=arr[i+1];
         sz--;
