@@ -60,15 +60,20 @@ void string_sort(const char *file_name)
 {
     ifstream fin(file_name);
     char **a=new char*[128];
+    char buf[128];
     int n=0;
+    int l;
 
     if(!fin.is_open())
         return;
 
     while(!fin.eof())
     {
-        a[n]=new char[128];
-        fin.getline(a[n], 128);
+        fin.getline(buf, 128);
+        l=strlen(buf);
+        a[n]=new char[l+1];
+        a[n][l]=0;
+        strcpy(a[n], buf);
         n++;
     }
 
