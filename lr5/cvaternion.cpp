@@ -3,6 +3,8 @@ using namespace std;
 #include "cvaternion.h"
 #include <math.h>
 
+Cvaternion cprint;
+
 void Cvaternion::input()
 {
     cout<<"вещественная часть "; cin>>real;
@@ -98,19 +100,6 @@ Type Cvaternion::module()
     return sqrt(i*i+j*j+k*k+real*real);
 }
 
-Cvaternion::Cvaternion(const Cvaternion &a)
-{
-    real=a.real;
-    i=a.i;
-    j=a.j;
-    k=a.k;
-}
-
-Cvaternion::Cvaternion()
-{
-    real=i=j=k=0;
-}
-
 const Cvaternion Cvaternion::operator+(const Cvaternion &a)
 {
     Cvaternion c;
@@ -159,6 +148,83 @@ const Cvaternion Cvaternion::operator*(const Type &a)
     return c;
 }
 
+std::ostream& operator<<(std::ostream& out, const Cvaternion &a)
+{
+    if(a.real)
+        cout<<a.real;
+
+    if(a.i)
+    {
+        if(a.real)
+        {
+            if(a.i==1)
+                cout<<"+i";
+            else if(a.i==-1)
+                cout<<"-i";
+            else if(a.i>0)
+                cout<<"+"<<a.i<<'i';
+        }
+        else
+        {
+            if(a.i==1)
+                cout<<"i";
+            else if(a.i==-1)
+                cout<<"-i";
+            else
+                cout<<a.i<<'i';
+        }
+    }
+
+    if(a.j)
+    {
+        if(a.real || a.i)
+        {
+            if(a.j==1)
+                cout<<"+j";
+            else if(a.j==-1)
+                cout<<"-j";
+            else if(a.j>0)
+                cout<<"+"<<a.j<<'j';
+        }
+        else
+        {
+            if(a.j==1)
+                cout<<"j";
+            else if(a.j==-1)
+                cout<<"-j";
+            else
+                cout<<a.j<<'j';
+        }
+    }
+
+    if(a.k)
+    {
+        if(a.real || a.i || a.j)
+        {
+            if(a.k==1)
+                cout<<"+k";
+            else if(a.k==-1)
+                cout<<"-k";
+            else if(a.k>0)
+                cout<<"+"<<a.k<<'k';
+        }
+        else
+        {
+            if(a.k==1)
+                cout<<"k";
+            else if(a.k==-1)
+                cout<<"-k";
+            else
+                cout<<a.k<<'k';
+        }
+    }
+
+    if(a.real==0 && a.i==0 && a.j==0 && a.k==0)
+        cout<<'0';
+
+    return out;
+}
+
 const Cvaternion Cvaternion::operator/(const Type &a)
 {
     Cvaternion c;
@@ -183,6 +249,29 @@ const Cvaternion Cvaternion::operator=(const Cvaternion &a)
     return c;
 }
 
+
+Cvaternion::Cvaternion(const Cvaternion &a)
+{
+    real=a.real;
+    i=a.i;
+    j=a.j;
+    k=a.k;
+}
+
+Cvaternion::Cvaternion()
+{
+    real=i=j=k=0;
+}
+
+
+Cvaternion::Cvaternion(Type real, Type i, Type j, Type k)
+{
+    this->real=real;
+    this->i=i;
+    this->j=j;
+    this->k=k;
+}
+
 void Cvaternion::set_real(Type real)
 {
     this->real=real;
@@ -200,6 +289,14 @@ void Cvaternion::set_j(Type j)
 
 void Cvaternion::set_k(Type k)
 {
+    this->k=k;
+}
+
+void Cvaternion::set_realijk(Type real, Type i, Type j, Type k)
+{
+    this->real=real;
+    this->i=i;
+    this->j=j;
     this->k=k;
 }
 
