@@ -62,14 +62,12 @@ void string_sort(const char *file_name)
     char **a=new char*[128];
     int n=0;
 
-    for(int i=0; i<128; i++)
-        a[i]=new char[128];
-
     if(!fin.is_open())
         return;
 
     while(!fin.eof())
     {
+        a[n]=new char[128];
         fin.getline(a[n], 128);
         n++;
     }
@@ -93,6 +91,10 @@ void string_sort(const char *file_name)
 
     for(int i=0; i<n; i++)
         fout<<a[i]<<endl;
+
+    for(int i=0; i<n; i++)
+        delete[]a[i];
+    delete[]a;
 
     fout.close();
 }
